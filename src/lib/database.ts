@@ -74,17 +74,12 @@ export const searchStatements = async ({ lastname, dob, phone_number }: SearchPa
   const year = Number(dob);
   
   try {
-    let query = supabase
+    const { data, error } = await supabase
       .from('statements')
       .select('*')
       .ilike('lastname', `${lastname}%`)
-      .eq('dob', year);
-    
-    if (phone_number) {
-      query = query.eq('phone_number', phone_number);
-    }
-
-    const { data, error } = await query;
+      .eq('dob', year)
+      .eq('phone_number', phone_number); // Always include phone number in query
 
     if (error) {
       console.error('Supabase error:', error);

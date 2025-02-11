@@ -19,5 +19,5 @@ export interface StatementUpload {
 export interface SearchParams {
   lastname: string;
   dob: string;
-  phone_number?: string;
+  phone_number: string; // Remove the ? to make it required
 }

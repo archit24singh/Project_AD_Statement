@@ -13,17 +13,17 @@ export function StatementRetrieval() {
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!lastname || !year) {
-      toast.error('Please enter both last name and birth year');
+    if (!lastname || !year || !phoneNumber) {
+      toast.error('Please enter last name, birth year, and phone number');
       return;
     }
-
+  
     if (!/^\d{4}$/.test(year)) {
       toast.error('Please enter a valid year (YYYY)');
       return;
     }
-
-    if (phoneNumber && !/^\d{10}$/.test(phoneNumber)) {
+  
+    if (!/^\d{10}$/.test(phoneNumber)) {
       toast.error('Phone number must be exactly 10 digits');
       return;
     }
@@ -131,18 +131,19 @@ export function StatementRetrieval() {
             </div>
             <div className="space-y-2">
               <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
-                Phone Number <span className="text-gray-500 text-xs">(Optional)</span>
+                Phone Number <span className="text-gray-500 text-xs">(Required)</span>
               </label>
               <input
-                type="text"
-                id="phoneNumber"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                maxLength={10}
-                pattern="\d{10}"
-                className="block w-full rounded-lg border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="8322288422"
-              />
+  type="text"
+  id="phoneNumber"
+  value={phoneNumber}
+  onChange={(e) => setPhoneNumber(e.target.value)}
+  maxLength={10}
+  pattern="\d{10}"
+  required
+  className="block w-full rounded-lg border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+  placeholder="8322288422"
+/>
             </div>
           </div>
           
